@@ -1,12 +1,12 @@
 set(SRCS
     main.cpp
-    TriangleWindow.cpp
-    TriangleWindow.h
+        FractalWindow.cpp
+        FractalWindow.h
 
     shaders.qrc
     Shaders/diffuse.fs
     Shaders/diffuse.vs
-)
+        Slider.h Slider.cpp)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 

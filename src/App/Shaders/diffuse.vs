@@ -1,13 +1,13 @@
 #version 330 core
 
 layout(location=0) in vec2 pos;
-layout(location=1) in vec3 col;
 
-uniform mat4 matrix;
+uniform vec2 shift;
+uniform float zoom_scale;
 
-out vec3 vert_col;
+out vec2 vert_pos;
 
 void main() {
-	vert_col = col;
-	gl_Position = matrix * vec4(pos.xy, 0.0, 1.0);
+    vert_pos = vec2((pos.x + shift.x) / zoom_scale, (pos.y + shift.y) / zoom_scale);
+	gl_Position = vec4(pos.xy, 0.0, 1.0);
 }
