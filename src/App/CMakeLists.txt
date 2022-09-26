@@ -1,12 +1,12 @@
 set(SRCS
     main.cpp
-    TriangleWindow.cpp
-    TriangleWindow.h
+        FractalWindow.cpp
+        FractalWindow.h
 
     shaders.qrc
     Shaders/diffuse.fs
     Shaders/diffuse.vs
-)
+        Slider.h Slider.cpp Mesh.h Model.h)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
@@ -16,4 +16,5 @@ target_link_libraries(demo-app
     PRIVATE
         Qt5::Widgets
         FGL::Base
+        assimp
 )

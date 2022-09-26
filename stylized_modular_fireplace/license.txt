@@ -1,0 +1,11 @@
+Model Information:
+* title:	Stylized Modular Fireplace
+* source:	https://sketchfab.com/3d-models/stylized-modular-fireplace-696bfa98c2b34bc3b962151ba3304928
+* author:	Michalina "Miszla" Gąsienica-Laskowy (https://sketchfab.com/Miszla)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Stylized Modular Fireplace" (https://sketchfab.com/3d-models/stylized-modular-fireplace-696bfa98c2b34bc3b962151ba3304928) by Michalina "Miszla" Gąsienica-Laskowy (https://sketchfab.com/Miszla) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
