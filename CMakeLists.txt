@@ -15,9 +15,10 @@ else()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
-set(BUILD_STATIC_LIB OFF)
+set(BUILD_SHARED_LIBS OFF)
 set(ASSIMP_INSTALL OFF)
 set(ASSIMP_WARNINGS_AS_ERRORS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
 
 add_subdirectory(thirdparty)
 
