@@ -4,7 +4,6 @@
 #include <QOpenGLFunctions>
 #include <QScreen>
 #include <QtMath>
-#include <QT>
 
 #include <array>
 
