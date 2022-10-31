@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <cmath>
 
 #include <QMatrix4x4>
 #include <QOpenGLFunctions>
@@ -119,7 +120,7 @@ private:
 
 			QVector3D cross = QVector3D::crossProduct(vertex.bitangent, vertex.tangent);
 			if (
-				signbit(vertex.normal.x()) != signbit(cross.x()) || signbit(vertex.normal.y()) != signbit(cross.y()) || signbit(vertex.normal.z()) != signbit(cross.z()))
+				std::signbit(vertex.normal.x()) != std::signbit(cross.x()) || std::signbit(vertex.normal.y()) != std::signbit(cross.y()) || std::signbit(vertex.normal.z()) != std::signbit(cross.z()))
 			{
 				QVector3D tmp = vertex.tangent;
 				vertex.tangent = vertex.bitangent;
