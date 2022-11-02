@@ -19,7 +19,7 @@ void FractalWindow::init()
 	// Bind attributes
 	program_->bind();
 
-	std::string path = "/Users/danilbk/Programming/CG/mse-gl-hw/stylized_modular_fireplace/scene.gltf";
+	std::string path = "../../../stylized_modular_fireplace/scene.gltf";
 	model_ = std::unique_ptr<Model>(new Model(path, *program_, this));
 
 	// Release all
