@@ -15,9 +15,17 @@ else()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
+set(BUILD_SHARED_LIBS OFF)
+set(ASSIMP_INSTALL OFF)
+set(ASSIMP_WARNINGS_AS_ERRORS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
+
 add_subdirectory(thirdparty)
 
-include_directories(src)
+include_directories(
+        src
+        thirdparty
+)
 
 # For Qt
 set(CMAKE_AUTOMOC ON)

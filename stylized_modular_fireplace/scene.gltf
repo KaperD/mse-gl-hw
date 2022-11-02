@@ -1,0 +1,528 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 1031,
+      "max": [
+        0.9493585228919983,
+        0.7119298577308655,
+        2.1912126541137695
+      ],
+      "min": [
+        -0.9182681441307068,
+        -0.6410230994224548,
+        -0.0049085915088653564
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 12372,
+      "componentType": 5126,
+      "count": 1031,
+      "max": [
+        0.9999033808708191,
+        0.9999915361404419,
+        0.9999899864196777
+      ],
+      "min": [
+        -0.999121904373169,
+        -0.9999186992645264,
+        -0.9999786615371704
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 1031,
+      "max": [
+        0.9999900460243225,
+        0.9998204112052917,
+        0.9999988079071045,
+        1.0
+      ],
+      "min": [
+        -0.9999987483024597,
+        -0.9999809265136719,
+        -0.9999983906745911,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 1031,
+      "max": [
+        0.9986013174057007,
+        0.9986152648925781
+      ],
+      "min": [
+        0.001380232977680862,
+        0.0013822981854900718
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 2862,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 24744,
+      "componentType": 5126,
+      "count": 363,
+      "max": [
+        0.48225027322769165,
+        0.4905095398426056,
+        1.987212061882019
+      ],
+      "min": [
+        -0.4961559772491455,
+        -0.4903525412082672,
+        -0.008654884994029999
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 29100,
+      "componentType": 5126,
+      "count": 363,
+      "max": [
+        0.9951101541519165,
+        0.9998238682746887,
+        0.9993655681610107
+      ],
+      "min": [
+        -0.9981928467750549,
+        -0.9998986721038818,
+        -0.999980092048645
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 16496,
+      "componentType": 5126,
+      "count": 363,
+      "max": [
+        0.9999863505363464,
+        0.9997522830963135,
+        0.9995160102844238,
+        1.0
+      ],
+      "min": [
+        -0.9999669790267944,
+        -0.8247928023338318,
+        -0.8246560096740723,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 8248,
+      "componentType": 5126,
+      "count": 363,
+      "max": [
+        0.9902676939964294,
+        0.8657739758491516
+      ],
+      "min": [
+        0.001388713251799345,
+        0.036391984671354294
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 11448,
+      "componentType": 5125,
+      "count": 1479,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 33456,
+      "componentType": 5126,
+      "count": 1262,
+      "max": [
+        0.6858535408973694,
+        0.6664760112762451,
+        3.20725679397583
+      ],
+      "min": [
+        -0.7572252154350281,
+        -0.6259870529174805,
+        -0.04710905998945236
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 48600,
+      "componentType": 5126,
+      "count": 1262,
+      "max": [
+        0.9990973472595215,
+        0.9998239278793335,
+        0.999947726726532
+      ],
+      "min": [
+        -0.9990973472595215,
+        -0.9998986721038818,
+        -0.9999801516532898
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 22304,
+      "componentType": 5126,
+      "count": 1262,
+      "max": [
+        0.9999863505363464,
+        0.9999863505363464,
+        0.999515950679779,
+        1.0
+      ],
+      "min": [
+        -0.9999670386314392,
+        -0.9999900460243225,
+        -0.9748786687850952,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 11152,
+      "componentType": 5126,
+      "count": 1262,
+      "max": [
+        7.831930637359619,
+        0.992056131362915
+      ],
+      "min": [
+        0.0013860506005585194,
+        0.0013858062447980046
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 17364,
+      "componentType": 5125,
+      "count": 3897,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Michalina \"Miszla\" Gąsienica-Laskowy (https://sketchfab.com/Miszla)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/stylized-modular-fireplace-696bfa98c2b34bc3b962151ba3304928",
+      "title": "Stylized Modular Fireplace"
+    },
+    "generator": "Sketchfab-14.28.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 32952,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 21248,
+      "byteOffset": 32952,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 63744,
+      "byteOffset": 54200,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 42496,
+      "byteOffset": 117944,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 160440,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Fireplace_baseColor.png"
+    },
+    {
+      "uri": "textures/Fireplace_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Fireplace_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Fireplace",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "SM_Fireplace_fireplace_Fireplace_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "SM_Fireplace_middle_Fireplace_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "SM_Fireplace_chimney.001_Fireplace_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 11,
+            "POSITION": 10,
+            "TANGENT": 12,
+            "TEXCOORD_0": 13
+          },
+          "indices": 14,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "b2576bb1790a4f168d8fc5501fd8df06.fbx"
+    },
+    {
+      "children": [
+        3,
+        5,
+        7
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        -194.73574829101563,
+        0.0,
+        14.629586219787598,
+        1.0
+      ],
+      "name": "SM_Fireplace_fireplace"
+    },
+    {
+      "mesh": 0,
+      "name": "SM_Fireplace_fireplace_Fireplace_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "SM_Fireplace_middle"
+    },
+    {
+      "mesh": 1,
+      "name": "SM_Fireplace_middle_Fireplace_0"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        175.9095001220703,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "SM_Fireplace_chimney.001"
+    },
+    {
+      "mesh": 2,
+      "name": "SM_Fireplace_chimney.001_Fireplace_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}
