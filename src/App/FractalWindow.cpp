@@ -25,61 +25,19 @@ void FractalWindow::init()
 	// Release all
 	program_->release();
 
-	vao_.release();
-
-	ibo_.release();
-	vbo_.release();
-
-	// Uncomment to enable depth test and face cullin
-	glEnable(GL_DEPTH_TEST);
-//	glEnable(GL_CULL_FACE);
-
 	// Clear all FBO buffers
 	float col = 185.0f / 255.0f;
 	glClearColor(col, col, col, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void FractalWindow::render()
 {
-	// Configure viewport
-	const auto retinaScale = devicePixelRatio();
-	glViewport(0, 0, static_cast<GLint>(width() * retinaScale),
-			   static_cast<GLint>(height() * retinaScale));
-
-	// Clear buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_STENCIL_TEST);
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	doMovement();
-
-	// Calculate MVP matrix
-	QMatrix4x4 model;
-
-	QMatrix4x4 view;
-
-	view.lookAt(
-		cameraPos_,
-		cameraPos_ + cameraDirection_,
-		{0, 1, 0});
-
-	QMatrix4x4 projection;
-	projection.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-
-	// Bind VAO and shader program
-	program_->bind();
-
-	// Update uniform value
-
-	// Draw
-	program_->setUniformValue(program_->uniformLocation("lightPos"), lightPos_);
-	program_->setUniformValue(program_->uniformLocation("viewPos"), cameraPos_);
-	program_->setUniformValue(program_->uniformLocation("blinn"), true);
-	program_->setUniformValue(program_->uniformLocation("lightType"), static_cast<int>(light_type_));
-	program_->setUniformValue(program_->uniformLocation("time"), static_cast<float>(animation_time_) / 3000.0f);
-
-	model_->Draw(model, view, projection);
-
-	// Release VAO and shader program
-	program_->release();
+	drawModel();
 
 	// Increment frame counter
 	++frame_;
@@ -169,11 +127,65 @@ void FractalWindow::setAnimationTime(int time)
 {
 	animation_time_ = time;
 }
-void FractalWindow::setLightType(LightType type)
-{
-	light_type_ = type;
-}
 void FractalWindow::moveLightToCurrentPosition()
 {
 	lightPos_ = cameraPos_;
+}
+void FractalWindow::mouseDoubleClickEvent(QMouseEvent * event)
+{
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_STENCIL_TEST);
+	glClearStencil(0);
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+	drawModel();
+
+	int stencil_value;
+	const auto retinaScale = devicePixelRatio();
+	auto x = static_cast<GLint>(event->localPos().x() * retinaScale);
+	auto y = static_cast<GLint>((height() - event->localPos().y()) * retinaScale);
+
+	glReadPixels(x, y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &stencil_value);
+	if (stencil_value != 0) {
+		model_->ClickOnMesh(stencil_value - 1);
+	}
+}
+void FractalWindow::drawModel()
+{
+	// Configure viewport
+	const auto retinaScale = devicePixelRatio();
+	glViewport(0, 0, static_cast<GLint>(width() * retinaScale),
+			   static_cast<GLint>(height() * retinaScale));
+
+	// Clear buffers
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	// Calculate MVP matrix
+	QMatrix4x4 model;
+
+	QMatrix4x4 view;
+
+	view.lookAt(
+		cameraPos_,
+		cameraPos_ + cameraDirection_,
+		{0, 1, 0});
+
+	QMatrix4x4 projection;
+	projection.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+
+	// Bind VAO and shader program
+	program_->bind();
+
+	// Update uniform value
+
+	// Draw
+	program_->setUniformValue(program_->uniformLocation("lightPos"), lightPos_);
+	program_->setUniformValue(program_->uniformLocation("viewPos"), cameraPos_);
+	program_->setUniformValue(program_->uniformLocation("blinn"), true);
+	program_->setUniformValue(program_->uniformLocation("time"), static_cast<float>(animation_time_) / 3000.0f);
+
+	model_->Draw(model, view, projection);
+
+	// Release VAO and shader program
+	program_->release();
 }

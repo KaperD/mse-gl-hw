@@ -1,11 +1,11 @@
 #pragma once
 
+#include <cmath>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <utility>
 #include <vector>
-#include <cmath>
 
 #include <QMatrix4x4>
 #include <QOpenGLFunctions>
@@ -33,14 +33,20 @@ public:
 
 	void Draw(QMatrix4x4 model, QMatrix4x4 view, QMatrix4x4 projection)
 	{
+		int i = 1;
 		for (auto & mesh: meshes_)
 		{
 			program_.setUniformValue(program_.uniformLocation("model"), model);
 			program_.setUniformValue(program_.uniformLocation("view"), view);
 			program_.setUniformValue(program_.uniformLocation("projection"), projection);
-			mesh->Draw(program_, *functions_);
+			mesh->Draw(program_, *functions_, i++);
 			model.translate(2, 0);
 		}
+	}
+
+	void ClickOnMesh(int mesh_index)
+	{
+		meshes_[mesh_index]->Click();
 	}
 
 private:

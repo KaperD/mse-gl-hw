@@ -5,7 +5,6 @@
 #include <QMatrix4x4>
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLVertexArrayObject>
 #include <QQuaternion>
 #include <QVector2D>
 #include <QVector3D>
@@ -17,12 +16,6 @@
 
 #include "Model.h"
 
-enum class LightType {
-	vertex = 1,
-	fragment = 2,
-	map = 3
-};
-
 class FractalWindow final : public fgl::GLWindow
 {
 
@@ -31,7 +24,6 @@ public:
 	void init() override;
 	void render() override;
 	void setAnimationTime(/*from 0 to 1000*/int time);
-	void setLightType(LightType type);
 	void moveLightToCurrentPosition();
 
 protected:
@@ -40,15 +32,11 @@ protected:
 	void keyPressEvent(QKeyEvent * event) override;
 	void mouseMoveEvent(QMouseEvent * event) override;
 	void keyReleaseEvent(QKeyEvent * event) override;
-
+	void mouseDoubleClickEvent(QMouseEvent * event) override;
+	void drawModel();
 
 private:
 	int animation_time_ = 0;
-	LightType light_type_ = LightType::map;
-
-	QOpenGLBuffer vbo_{QOpenGLBuffer::Type::VertexBuffer};
-	QOpenGLBuffer ibo_{QOpenGLBuffer::Type::IndexBuffer};
-	QOpenGLVertexArrayObject vao_;
 
 	std::unique_ptr<QOpenGLShaderProgram> program_ = nullptr;
 

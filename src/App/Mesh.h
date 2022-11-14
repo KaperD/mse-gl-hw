@@ -33,6 +33,12 @@ struct Texture {
 	std::string path;
 };
 
+enum class LightType {
+	vertex = 1,
+	fragment = 2,
+	map = 3
+};
+
 class Mesh
 {
 	std::vector<Vertex> vertices_;
@@ -41,6 +47,7 @@ class Mesh
 	QOpenGLBuffer vbo_{QOpenGLBuffer::Type::VertexBuffer};
 	QOpenGLBuffer ibo_{QOpenGLBuffer::Type::IndexBuffer};
 	QOpenGLVertexArrayObject vao_;
+	int light_type_ = static_cast<int>(LightType::map);
 
 public:
 	Mesh(
@@ -56,7 +63,7 @@ public:
 		setupMesh(program);
 	}
 
-	void Draw(QOpenGLShaderProgram & program, QOpenGLFunctions & functions)
+	void Draw(QOpenGLShaderProgram & program, QOpenGLFunctions & functions, int order)
 	{
 		unsigned int diffuse_number = 1;
 		unsigned int specular_number = 1;
@@ -87,12 +94,20 @@ public:
 			program.setUniformValue(program.uniformLocation(uniform.c_str()), i);
 			functions.glBindTexture(GL_TEXTURE_2D, textures_[i].id);
 		}
+		program.setUniformValue(program.uniformLocation("lightType"), light_type_ + 1);
 
 		vao_.bind();
+		functions.glStencilFunc(GL_ALWAYS, order, 0xFF);
+		functions.glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		functions.glStencilMask(0xFF);
 		functions.glDrawElements(GL_TRIANGLES, static_cast<int>(indices_.size()), GL_UNSIGNED_INT, nullptr);
 		vao_.release();
 
 		functions.glActiveTexture(GL_TEXTURE0);
+	}
+
+	void Click() {
+		light_type_ = (light_type_ + 1) % 3;
 	}
 
 private:
