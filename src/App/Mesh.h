@@ -95,11 +95,9 @@ public:
 			functions.glBindTexture(GL_TEXTURE_2D, textures_[i].id);
 		}
 		program.setUniformValue(program.uniformLocation("lightType"), light_type_ + 1);
+		program.setUniformValue(program.uniformLocation("id"), order);
 
 		vao_.bind();
-		functions.glStencilFunc(GL_ALWAYS, order, 0xFF);
-		functions.glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-		functions.glStencilMask(0xFF);
 		functions.glDrawElements(GL_TRIANGLES, static_cast<int>(indices_.size()), GL_UNSIGNED_INT, nullptr);
 		vao_.release();
 

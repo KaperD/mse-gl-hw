@@ -25,6 +25,15 @@ void FractalWindow::init()
 	// Release all
 	program_->release();
 
+	click_program_ = std::make_unique<QOpenGLShaderProgram>(this);
+	click_program_->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shaders/click.vs");
+	click_program_->addShaderFromSourceFile(QOpenGLShader::Fragment,
+									  ":/Shaders/click.fs");
+	click_program_->link();
+
+	const auto retinaScale = devicePixelRatio();
+	click_fbo_ = std::make_unique<QOpenGLFramebufferObject>(static_cast<int>(1 * retinaScale), static_cast<int>(1 * retinaScale), QOpenGLFramebufferObject::Attachment::Depth);
+
 	// Clear all FBO buffers
 	float col = 185.0f / 255.0f;
 	glClearColor(col, col, col, 1.0);
@@ -37,7 +46,13 @@ void FractalWindow::render()
 	glDisable(GL_STENCIL_TEST);
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	doMovement();
-	drawModel();
+	QOpenGLFramebufferObject::bindDefault();
+	// Configure viewport
+	const auto retinaScale = devicePixelRatio();
+	const auto screen_width = static_cast<GLint>(width() * retinaScale);
+	const auto screen_height = static_cast<GLint>(height() * retinaScale);
+	glViewport(0, 0, screen_width, screen_height);
+	drawModel(*program_);
 
 	// Increment frame counter
 	++frame_;
@@ -136,27 +151,46 @@ void FractalWindow::mouseDoubleClickEvent(QMouseEvent * event)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
 	glClearStencil(0);
-	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-	drawModel();
-
-	int stencil_value;
 	const auto retinaScale = devicePixelRatio();
-	auto x = static_cast<GLint>(event->localPos().x() * retinaScale);
-	auto y = static_cast<GLint>((height() - event->localPos().y()) * retinaScale);
+	const auto screen_width = static_cast<int>(width() * retinaScale);
+	const auto screen_height = static_cast<int>(height() * retinaScale);
 
-	glReadPixels(x, y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &stencil_value);
-	if (stencil_value != 0) {
-		model_->ClickOnMesh(stencil_value - 1);
+	const auto width = static_cast<float>(1 * retinaScale);
+	const auto height = static_cast<float>(1 * retinaScale);
+	const auto x = static_cast<int>(event->x() * retinaScale);
+	const auto y = screen_height - static_cast<int>(event->y() * retinaScale);
+	float sx, sy;
+	float tx, ty;
+	sx = static_cast<float>(screen_width) / width;
+	sy = static_cast<float>(screen_height) / height;
+	tx = static_cast<float>(screen_width - 2 * x) / width;
+	ty = static_cast<float>(screen_height - 2 * y) / height;
+	auto old_zoom = zoom_;
+	zoom_ =
+		{
+			sx, 0, 0, tx,
+			0, sy, 0, ty,
+			0, 0,  1, 0,
+			0, 0,  0, 1
+		};
+
+	click_fbo_->bind();
+	glViewport(0, 0, static_cast<int>(1 * retinaScale), static_cast<int>(1 * retinaScale));
+	drawModel(*click_program_);
+
+	zoom_ = old_zoom;
+
+	int id_value;
+	glReadPixels(0, 0, 1, 1, GL_RED, GL_UNSIGNED_BYTE, &id_value);
+	if (id_value != 0) {
+		model_->ClickOnMesh(id_value - 1);
 	}
+	click_fbo_->release();
 }
-void FractalWindow::drawModel()
+void FractalWindow::drawModel(QOpenGLShaderProgram& program)
 {
-	// Configure viewport
-	const auto retinaScale = devicePixelRatio();
-	glViewport(0, 0, static_cast<GLint>(width() * retinaScale),
-			   static_cast<GLint>(height() * retinaScale));
-
 	// Clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -173,19 +207,20 @@ void FractalWindow::drawModel()
 	QMatrix4x4 projection;
 	projection.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 
+	projection = zoom_ * projection;
+
 	// Bind VAO and shader program
-	program_->bind();
+	program.bind();
 
 	// Update uniform value
 
 	// Draw
-	program_->setUniformValue(program_->uniformLocation("lightPos"), lightPos_);
-	program_->setUniformValue(program_->uniformLocation("viewPos"), cameraPos_);
-	program_->setUniformValue(program_->uniformLocation("blinn"), true);
-	program_->setUniformValue(program_->uniformLocation("time"), static_cast<float>(animation_time_) / 3000.0f);
-
-	model_->Draw(model, view, projection);
+	program.setUniformValue(program.uniformLocation("lightPos"), lightPos_);
+	program.setUniformValue(program.uniformLocation("viewPos"), cameraPos_);
+	program.setUniformValue(program.uniformLocation("blinn"), true);
+	program.setUniformValue(program.uniformLocation("time"), static_cast<float>(animation_time_) / 3000.0f);
+	model_->Draw(model, view, projection, program);
 
 	// Release VAO and shader program
-	program_->release();
+	program.release();
 }

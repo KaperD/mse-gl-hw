@@ -5,6 +5,7 @@
 #include <QMatrix4x4>
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLFramebufferObject>
 #include <QQuaternion>
 #include <QVector2D>
 #include <QVector3D>
@@ -33,12 +34,15 @@ protected:
 	void mouseMoveEvent(QMouseEvent * event) override;
 	void keyReleaseEvent(QKeyEvent * event) override;
 	void mouseDoubleClickEvent(QMouseEvent * event) override;
-	void drawModel();
+	void drawModel(QOpenGLShaderProgram& program);
 
 private:
 	int animation_time_ = 0;
 
 	std::unique_ptr<QOpenGLShaderProgram> program_ = nullptr;
+
+	std::unique_ptr<QOpenGLShaderProgram> click_program_ = nullptr;
+	std::unique_ptr<QOpenGLFramebufferObject> click_fbo_ = nullptr;
 
 	size_t frame_ = 0;
 
@@ -48,6 +52,8 @@ private:
 	QVector3D lightPos_{2, 4, -4};
 	QVector3D cameraDirection_{0, 0, 1};
 	QVector3D cameraUp_{0, 1, 0};
+
+	QMatrix4x4 zoom_;
 
 	int lastX = 0;
 	int lastY = 0;
