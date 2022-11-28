@@ -27,6 +27,7 @@ int main(int argc, char ** argv)
 	format.setVersion(g_gl_major_version, g_gl_minor_version);
 	format.setProfile(QSurfaceFormat::CoreProfile);
 	format.setDepthBufferSize(16);
+	format.setStencilBufferSize(8);
 
 	auto fpsLabel = new QLabel("FPS: ");
 
@@ -47,29 +48,10 @@ int main(int argc, char ** argv)
 	auto buttons = new QWidget;
 	auto * hbox = new QHBoxLayout(buttons);
 
-	auto map = new QRadioButton("Map", buttons);
-	map->setChecked(true);
-	QObject::connect(map, &QRadioButton::toggled, &glWindow,
-					 [&](bool checked) { if (checked)
-			glWindow.setLightType(LightType::map); });
-
-	auto fragment = new QRadioButton("Fragment", buttons);
-	QObject::connect(fragment, &QRadioButton::toggled, &glWindow,
-					 [&](bool checked) { if (checked)
-			glWindow.setLightType(LightType::fragment); });
-
-	auto vertex = new QRadioButton("Vertex", buttons);
-	QObject::connect(vertex, &QRadioButton::toggled, &glWindow,
-					 [&](bool checked) { if (checked)
-			glWindow.setLightType(LightType::vertex); });
-
 	auto moveLight = new QPushButton("Move light to current position", buttons);
 	QObject::connect(moveLight, &QPushButton::clicked, &glWindow,
 					 [&]() { glWindow.moveLightToCurrentPosition(); });
 
-	hbox->addWidget(map);
-	hbox->addWidget(fragment);
-	hbox->addWidget(vertex);
 	hbox->addWidget(moveLight);
 	hbox->setAlignment(Qt::AlignLeft);
 	l->addWidget(buttons, 0, Qt::Alignment(Qt::AlignBottom));

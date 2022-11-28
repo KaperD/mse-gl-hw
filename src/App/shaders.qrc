@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>Shaders/diffuse.fs</file>
         <file>Shaders/diffuse.vs</file>
+        <file>Shaders/click.fs</file>
+        <file>Shaders/click.vs</file>
     </qresource>
 </RCC>
