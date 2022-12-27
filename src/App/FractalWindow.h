@@ -25,6 +25,9 @@ public:
 	void init() override;
 	void render() override;
 	void setAnimationTime(/*from 0 to 1000*/int time);
+	void setKernelSize(/*from 4 to 128*/int size);
+	void setUseAO(bool use);
+	void setUseOnlyAO(bool use);
 	void moveLightToCurrentPosition();
 
 protected:
@@ -38,11 +41,18 @@ protected:
 
 private:
 	int animation_time_ = 0;
+	int kernel_size_ = 64;
+	bool use_ao_ = false;
+	bool use_only_ao_ = false;
 
 	std::unique_ptr<QOpenGLShaderProgram> program_ = nullptr;
+	unsigned int program_fbo_ = 0;
+	unsigned int depth_tex_ = 0;
 
 	std::unique_ptr<QOpenGLShaderProgram> click_program_ = nullptr;
 	std::unique_ptr<QOpenGLFramebufferObject> click_fbo_ = nullptr;
+
+	std::vector<QVector3D> ssao_kernel_{64};
 
 	size_t frame_ = 0;
 

@@ -23,6 +23,9 @@ out VS_OUT {
     vec3 Specular;
     float Diffuse2;
     vec3 Specular2;
+    mat3 ViewTBN;
+    vec3 Tangent;
+    vec3 Bitangent;
 } vs_out;
 
 void main() {
@@ -69,6 +72,11 @@ void main() {
     halfwayDir = normalize(lightDir + viewDir);
     spec = pow(max(dot(-normal, halfwayDir), 0.0), 32.0);
     vs_out.Specular2 = vec3(0.3) * spec;
+
+    mat3 normalMatrix = transpose(inverse(mat3(view * model)));
+    vs_out.ViewTBN = mat3(normalize(normalMatrix * modifiedTangent), normalize(normalMatrix * modifiedBitangent), normalize(normalMatrix * normal));
+    vs_out.Tangent = modifiedTangent;
+    vs_out.Bitangent = modifiedBitangent;
 
 	gl_Position = projection * view * model * vec4(modifiedPos, 1.0);
 }

@@ -27,7 +27,6 @@ int main(int argc, char ** argv)
 	format.setVersion(g_gl_major_version, g_gl_minor_version);
 	format.setProfile(QSurfaceFormat::CoreProfile);
 	format.setDepthBufferSize(16);
-	format.setStencilBufferSize(8);
 
 	auto fpsLabel = new QLabel("FPS: ");
 
@@ -52,7 +51,40 @@ int main(int argc, char ** argv)
 	QObject::connect(moveLight, &QPushButton::clicked, &glWindow,
 					 [&]() { glWindow.moveLightToCurrentPosition(); });
 
+	auto without_ao = new QRadioButton("Without AO", buttons);
+	without_ao->setChecked(true);
+	QObject::connect(without_ao, &QRadioButton::toggled, &glWindow,
+					 [&](bool checked) {
+		 if (checked)
+		 {
+			 glWindow.setUseAO(false);
+			 glWindow.setUseOnlyAO(false);
+		 }
+ 	});
+
+	auto with_ao = new QRadioButton("With AO", buttons);
+	QObject::connect(with_ao, &QRadioButton::toggled, &glWindow,
+					 [&](bool checked) { if (checked)
+		{
+			glWindow.setUseAO(true);
+			glWindow.setUseOnlyAO(false);
+		}
+	});
+
+	auto only_ao = new QRadioButton("Only AO", buttons);
+	QObject::connect(only_ao, &QRadioButton::toggled, &glWindow,
+					 [&](bool checked) { if (checked)
+		{
+			glWindow.setUseAO(true);
+			glWindow.setUseOnlyAO(true);
+		}
+	});
+
+
 	hbox->addWidget(moveLight);
+	hbox->addWidget(without_ao);
+	hbox->addWidget(with_ao);
+	hbox->addWidget(only_ao);
 	hbox->setAlignment(Qt::AlignLeft);
 	l->addWidget(buttons, 0, Qt::Alignment(Qt::AlignBottom));
 
@@ -60,6 +92,11 @@ int main(int argc, char ** argv)
 	QObject::connect(timeSlider->slider_, &QSlider::valueChanged, &glWindow,
 					 [&](int x) { glWindow.setAnimationTime(x); });
 	l->addWidget(timeSlider, 0, Qt::Alignment(Qt::AlignBottom));
+
+	auto kernelSizeSlider = new Slider("Kernel Size", 4, 128, 64);
+	QObject::connect(kernelSizeSlider->slider_, &QSlider::valueChanged, &glWindow,
+					 [&](int x) { glWindow.setKernelSize(x); });
+	l->addWidget(kernelSizeSlider, 0, Qt::Alignment(Qt::AlignBottom));
 
 	window->setLayout(l);
 	window->showFullScreen();
